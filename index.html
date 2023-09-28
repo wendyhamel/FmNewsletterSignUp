@@ -8,13 +8,18 @@
   
   <title>Frontend Mentor | Newsletter sign-up form with success message</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <!-- Font -->
+  <link rel="stylesheet" type="text/css" href="./style/font.css">
+
+  <!-- Tailwind play cdn ( for development and play purposes ) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="script/tailwind-config.js"></script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 </head>
-<body>
+<body x-data="signup()">
 
   <!-- Sign-up form start -->
 
@@ -49,4 +54,11 @@
     Coded by <a href="#">Your Name Here</a>.
   </div>
 </body>
+<footer class="fixed bottom-0 inset-x-0 text-center text-xs py-2 bg-white opacity-0 translate-y-2 hover:opacity-100 hover:translate-y-0 transform transition ease-in-out duration-150">
+  <div class="p-2 text-center ">
+    Challenge by <a class="hover:underline ease-in-out duration-150" href="https://www.frontendmentor.io/challenges/newsletter-signup-form-with-success-message-3FC1AZbNrv" target="_blank">Frontend Mentor</a>.
+    Coded by <a class="hover:underline ease-in-out duration-150" href="https://www.frontendmentor.io/profile/wendyhamel" target="_blank">Wendy Hamel</a>.
+  </div>
+</footer>
+<script src="script/form.js"></script>
 </html>
