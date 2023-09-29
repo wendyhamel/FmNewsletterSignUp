@@ -19,46 +19,106 @@
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </head>
-<body x-data="signup()">
-
+<body x-data="signup()" class="antialiased text-gray-dark bg-white sm:bg-gray-dark sm:grid sm:place-items-center sm:min-h-screen">
+  <h1 class="sr-only">Sign-up form</h1>
   <!-- Sign-up form start -->
-
-  Stay updated!
-
-  Join 60,000+ product managers receiving monthly updates on:
-
-  Product discovery and building what matters
-  Measuring to ensure updates are a success
-  And much more!
-
-  Email address
-  email@company.com
-
-  Subscribe to monthly newsletter
-
+  <section
+      x-show="!successMessage"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 scale-90"
+      x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="transition ease-in duration-300"
+      x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-90"
+      style="display: none"
+      class="absolute flex flex-col bg-white sm:max-w-xl sm:rounded-3xl sm:overflow-hidden sm:mt-12 sm:mx-auto lg:flex-row-reverse lg:max-w-screen-lg lg:p-6"
+  >
+    <picture>
+      <source srcset="./assets/images/illustration-sign-up-desktop.svg" media="(min-width:1024px)">
+      <img class="object-cover w-full h-full" src="./assets/images/illustration-sign-up-mobile.svg" alt="illustration sign-up">
+    </picture>
+    <div class="pt-8 px-6 space-y-3 lg:pt-12 lg:px-10">
+      <h2 class="text-lg font-bold lg:text-2xl">Stay updated!</h2>
+      <p class="max-w-sm">Join 60,000+ product managers receiving monthly updates on:</p>
+      <ul class="pt-2 space-y-1.5">
+        <li class="flex items-baseline gap-4">
+          <span class="block translate-y-1 w-6"><img class="w-full h-full object-cover" src="./assets/images/icon-list.svg" alt="icon checklist"></span>
+          <span>Product discovery and building what matters</span>
+        </li>
+        <li class="flex items-baseline gap-4">
+          <span class="block translate-y-1 w-6"><img class="w-full h-full object-cover" src="./assets/images/icon-list.svg" alt="icon checklist"></span>
+          <span>Measuring to ensure updates are a success</span>
+        </li>
+        <li class="flex items-baseline gap-4">
+          <span class="block translate-y-1 w-6"><img class="w-full h-full object-cover" src="./assets/images/icon-list.svg" alt="icon checklist"></span>
+          <span>And much more!</span>
+        </li>
+      </ul>
+      <form class="space-y-5 pb-10 lg:space-y-6">
+        <label class="block pt-6">
+          <span class="flex gap-2 justify-between pb-2 text-xs font-bold">
+            <span class="inline-block">Email address</span>
+            <span class="inline-block text-red" x-text="validation.email.message"></span>
+          </span>
+          <input
+              :class="validation.email.invalid ? 'border border-red rounded-lg px-6 py-4 w-full bg-red/10 text-red placeholder:text-red focus-visible:outline-gray-dark' : 'border border-gray rounded-lg px-6 py-4 w-full placeholder:text-gray hover:border-gray-dark focus-visible:outline-gray-dark'"
+              x-model="email"
+              type="text"
+              placeholder="email@company.com"
+              required
+          >
+        </label>
+        <button
+            class="relative overflow-hidden flex items-center justify-center w-full rounded-lg py-5 px-6 bg-gradient-to-r from-gradient-start to-gradient-end text-white font-bold leading-none focus-visible:outline-none group"
+            @click="submit()"
+            type="button"
+        >
+          <span class="absolute inset-0 bg-gray-dark group-hover:opacity-0 group-focus-visible:opacity-0 transition ease-out duration-300"></span>
+          <span class="relative">Subscribe to monthly newsletter</span>
+        </button>
+      </form>
+    </div>
+  </section>
   <!-- Sign-up form end -->
 
   <!-- Success message start -->
-
-  Thanks for subscribing!
-
-  A confirmation email has been sent to ash@loremcompany.com. 
-  Please open it and click the button inside to confirm your subscription.
-
-  Dismiss message
-
+   <section
+       x-show="successMessage"
+       x-transition:enter="transition ease-out duration-300 delay-500"
+       x-transition:enter-start="opacity-0 sm:scale-90"
+       x-transition:enter-end="opacity-100 sm:scale-100"
+       x-transition:leave="transition ease-in duration-300"
+       x-transition:leave-start="opacity-100 sm:scale-100"
+       x-transition:leave-end="opacity-0 sm:scale-90"
+       style="display: none"
+       class="absolute min-h-screen bg-white flex flex-col gap-8 pt-6 pb-10 px-6 sm:static sm:min-h-min sm:rounded-3xl sm:overflow-hidden sm:max-w-lg sm:pt-12 sm:px-16 sm:pb-16"
+   >
+       <div class="grow sm:hidden"></div>
+       <img class="w-16 h-16" src="./assets/images/icon-success.svg" alt="checked icon success">
+       <h2 class="pt-2 text-lg font-bold leading-none sm:text-xl">Thanks for subscribing!</h2>
+       <p>
+         A confirmation email has been sent to <span class="font-bold" x-text="email"></span>.
+         Please open it and click the button inside to confirm your subscription.
+       </p>
+       <div class="grow sm:hidden"></div>
+       <div class="grow sm:hidden"></div>
+       <button
+               class="relative overflow-hidden flex items-center justify-center w-full rounded-lg py-5 px-6 bg-gradient-to-r from-gradient-start to-gradient-end text-white font-bold leading-none focus-visible:outline-none group"
+               @click="successMessage = false; email=''"
+               type="button"
+       >
+         <span class="absolute inset-0 bg-gray-dark group-hover:opacity-0 group-focus-visible:opacity-0 transition ease-out duration-300"></span>
+         <span class="relative">Dismiss message</span>
+       </button>
+   </section>
   <!-- Success message end -->
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+
+  <footer class="fixed bottom-0 inset-x-0 text-center text-xs py-1 bg-white opacity-0 translate-y-2 hover:opacity-90 hover:translate-y-0 transform transition ease-out duration-300 md:py-2">
+    <div class="px-2 text-center">
+      Challenge by <a class="hover:underline ease-in-out duration-150" href="https://www.frontendmentor.io/challenges/newsletter-signup-form-with-success-message-3FC1AZbNrv" target="_blank">Frontend Mentor</a>.
+      Coded by <a class="hover:underline ease-in-out duration-150" href="https://www.frontendmentor.io/profile/wendyhamel" target="_blank">Wendy Hamel</a>.
+    </div>
+  </footer>
 </body>
-<footer class="fixed bottom-0 inset-x-0 text-center text-xs py-2 bg-white opacity-0 translate-y-2 hover:opacity-100 hover:translate-y-0 transform transition ease-in-out duration-150">
-  <div class="p-2 text-center ">
-    Challenge by <a class="hover:underline ease-in-out duration-150" href="https://www.frontendmentor.io/challenges/newsletter-signup-form-with-success-message-3FC1AZbNrv" target="_blank">Frontend Mentor</a>.
-    Coded by <a class="hover:underline ease-in-out duration-150" href="https://www.frontendmentor.io/profile/wendyhamel" target="_blank">Wendy Hamel</a>.
-  </div>
-</footer>
 <script src="script/form.js"></script>
 </html>

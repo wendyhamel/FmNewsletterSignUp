@@ -1,6 +1,7 @@
 window.signup = function () {
     return {
         email: '',
+        successMessage: false,
         validation: {
             email: {
                 rule: {
@@ -8,7 +9,7 @@ window.signup = function () {
                         if (field) {
                             return { invalid: false, message: '' }
                         } else {
-                            return { invalid: true, message: 'This field is required' }
+                            return { invalid: true, message: 'Valid email required' }
                         }
                     },
                     email: function (field) {
@@ -16,7 +17,7 @@ window.signup = function () {
                         if (validEmailRegex.test(field)) {
                             return { invalid: false, message: '' }
                         } else {
-                            return { invalid: true, message: 'Please provide a valid email' }
+                            return { invalid: true, message: 'Valid email required' }
                         }
                     }
                 }
@@ -34,5 +35,11 @@ window.signup = function () {
                 this.validation[field].message = ''
             }
         },
+        submit() {
+            this.validate('email')
+            if (!this.validation.email.invalid) {
+                this.successMessage = true;
+            }
+        }
     }
 }
